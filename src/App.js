@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Login from './components/Login';
 import Register from './components/Register';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ViewDonor from './components/ViewDonor';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 <Routes>
   <Route path='/' exact element={<Login/>}/>
   <Route path='/register' exact element={<Register/>}/>
+  <Route path='/view' exact element={<ViewDonor/>}/>
 </Routes>
 </BrowserRouter>
     </div>
