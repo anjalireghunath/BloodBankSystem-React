@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Header from './Header'
 
 const Register = () => {
     var [name,setName]=useState("")
@@ -13,7 +14,7 @@ const Register = () => {
     }
   return (
     <div>
-
+<Header/>
 <div className="container">
     <div className="row">
         <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
@@ -45,7 +46,7 @@ const Register = () => {
                 <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                     <button onClick={addReg} className="btn btn-success">REGISTER</button>
                     <div classNameName="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                        <a href="/login">Back to login</a>
+                        <a href="/">Back to login</a>
                     </div>
                 </div>
             </div>
