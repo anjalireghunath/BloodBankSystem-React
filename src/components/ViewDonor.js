@@ -10,6 +10,22 @@ const ViewDonor = () => {
       setViewDonor(response.data)
       setLoadstatus(false)
     })
+
+    const deleteData=(id)=>{
+      const data={"_id":id}
+      console.log(data)
+      axios.post("http://localhost:4005/api/delete",data).then((response)=>{
+          if(response.data.status=="success")
+          {
+              alert("successfully deleted")
+          }
+          else
+          {
+              alert("failed to delete")
+          }
+      })
+  }
+
   return (
     <div>
 <Header/>
@@ -30,6 +46,7 @@ const ViewDonor = () => {
                  <th scope="col">MobileNo</th>
                  <th scope="col">UserName</th>
                  <th scope="col">Password</th>
+                 <th scope="col">Action</th>
                </tr>
              </thead>
              <tbody>
@@ -41,6 +58,7 @@ const ViewDonor = () => {
                  <td>{value.mobileno}</td>
                  <td>{value.username}</td>
                  <td>{value.password}</td>
+                 <button onClick={()=>{deleteData(value._id)}} className="btn btn-danger">DELETE</button>
                </tr>
                })}
                
