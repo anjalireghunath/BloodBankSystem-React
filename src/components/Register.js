@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import Header from './Header'
 
@@ -11,6 +12,18 @@ const Register = () => {
     const addReg=()=>{
         const data={"name":name,"address":address,"bloodgroup":bloodgroup,"mobileno":mobileno,"username":username,"password":password}
         console.log(data)
+        axios.post("http://localhost:4005/api/add",data).then((response)=>{
+            console.log(response.data)
+            if(response.data.status=="success")
+            {
+                alert("successfully added")
+
+            }
+            else
+            {
+                alert("failed to add")
+            }
+        })
     }
   return (
     <div>
@@ -45,7 +58,7 @@ const Register = () => {
                 </div>
                 <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                     <button onClick={addReg} className="btn btn-success">REGISTER</button>
-                    <div classNameName="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                         <a href="/">Back to login</a>
                     </div>
                 </div>

@@ -1,21 +1,31 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import Header from './Header'
 
 const ViewDonor = () => {
-    var viewdonor=[
-        {
-            "name":"Anjali",
-            "address":"keazhadethu",
-            "bloodgroup":"A+",
-            "mobileno":"9846425864"
-        },
-        {
-            "name":"Ashik",
-            "address":"abc",
-            "bloodgroup":"A+",
-            "mobileno":"80896598542"
-        }
-    ]
+    var [viewdonor,setViewDonor]=useState([])
+    var [loadstatus,setLoadstatus]=useState(true)
+    axios.get("http://localhost:4005/api/view").then((response)=>{
+      console.log(response.data)
+      setViewDonor(response.data)
+      setLoadstatus(false)
+    })
+
+    const deleteData=(id)=>{
+      const data={"_id":id}
+      console.log(data)
+      axios.post("http://localhost:4005/api/delete",data).then((response)=>{
+          if(response.data.status=="success")
+          {
+              alert("successfully deleted")
+          }
+          else
+          {
+              alert("failed to delete")
+          }
+      })
+  }
+
   return (
     <div>
 <Header/>
@@ -24,30 +34,40 @@ const ViewDonor = () => {
             <div className='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
             <div className='row g-3'>
                 <div className='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
-                <table class="table table-primary table-striped">
-  <thead className='table-danger'>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">BloodGroup</th>
-      <th scope="col">MobileNo</th>
-    </tr>
-  </thead>
-  <tbody>
-    {viewdonor.map((value,key)=>{
-      return <tr>
-      <td>{value.name}</td>
-      <td>{value.address}</td>
-      <td>{value.bloodgroup}</td>
-      <td>{value.mobileno}</td>
-    </tr>
-    })}
-    
-    
-    
-  </tbody>
-</table>
-
+                  {loadstatus ? <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div> :
+             <table class="table table-primary table-striped">
+             <thead className='table-danger'>
+               <tr>
+                 <th scope="col">Name</th>
+                 <th scope="col">Address</th>
+                 <th scope="col">BloodGroup</th>
+                 <th scope="col">MobileNo</th>
+                 <th scope="col">UserName</th>
+                 <th scope="col">Password</th>
+                 <th scope="col">Action</th>
+               </tr>
+             </thead>
+             <tbody>
+               {viewdonor.map((value,key)=>{
+                 return <tr>
+                 <td>{value.name}</td>
+                 <td>{value.address}</td>
+                 <td>{value.bloodgroup}</td>
+                 <td>{value.mobileno}</td>
+                 <td>{value.username}</td>
+                 <td>{value.password}</td>
+                 <button onClick={()=>{deleteData(value._id)}} className="btn btn-danger">DELETE</button>
+               </tr>
+               })}
+               
+               
+               
+             </tbody>
+           </table>
+                 }
+               
 
 
                     </div>

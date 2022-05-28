@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ViewDonor from './components/ViewDonor';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 <Routes>
   <Route path='/' exact element={<Login/>}/>
   <Route path='/register' exact element={<Register/>}/>
+  <Route path='/search' exact element={<Search/>}/>
   <Route path='/view' exact element={<ViewDonor/>}/>
 </Routes>
 </BrowserRouter>
